@@ -1,0 +1,29 @@
+{
+  "name": "prismic-markdown",
+  "version": "0.0.1",
+  "description": "render prismic json fragments as Markdown",
+  "main": "dist/prismic-markdown.js",
+  "scripts": {
+    "build": "webpack --debug; webpack -p",
+    "dev": "webpack -d --watch",
+    "prepublish": "npm run build",
+    "pretest": "webpack --config test/webpack.config.js",
+    "test": "mocha test-build/test-bundle.js"
+  },
+  "repository": "git@github.com:JungleMinds/prismic-markdown.git",
+  "author": "grumpyoldman-io <hello@grumpyoldman.io>",
+  "license": "ISC",
+  "dependencies": {
+    "prismic-helpers": "^1.0.0",
+    "prismic-richtext": "^0.4.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "chai": "^4.1.2",
+    "mocha": "^5.0.1",
+    "webpack": "^2.7.0",
+    "yargs": "^7.1.0"
+  }
+}

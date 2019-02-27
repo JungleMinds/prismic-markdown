@@ -1,0 +1,14 @@
+{
+  "name": "prismic-markdown",
+  "description": "render prismic json fragments as Markdown",
+  "main": "dist/prismic-markdown.min.js",
+  "license": "ISC",
+  "homepage": "https://github.com/jungleminds/prismic-markdown",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
