@@ -4,9 +4,21 @@ const asText = RichText.asText;
 const asMarkdown = RichText.asMarkdown;
 
 const mock = [
-  { type: "heading1", text: "Title", spans: [] },
-  { type: "paragraph", text: "A > B", spans: [] },
-  { type: "preformatted", text: "<example>\n  TEST\n</example>", spans: [] },
+  {
+    type: "heading1",
+    text: "Title",
+    spans: []
+  },
+  {
+    type: "paragraph",
+    text: "A > B",
+    spans: []
+  },
+  {
+    type: "preformatted",
+    text: "<example>\n  TEST\n</example>",
+    spans: []
+  },
   {
     type: "paragraph",
     text: "This is bold and italic and >:) both.",
@@ -32,6 +44,24 @@ const mock = [
         type: "em"
       }
     ]
+  },
+  {
+    type: "embed",
+    oembed: {
+      type: "video",
+      embed_url: "https://www.youtube.com/watch?v=youtube-id",
+      title: "Video Title",
+      provider_name: "YouTube",
+      thumbnail_url: "https://i.ytimg.com/vi/youtube-id/hqdefault.jpg",
+      version: "1.0",
+      author_url: "https://www.youtube.com/channel/channel-id",
+      author_name: "Channel Name",
+      provider_url: "https: //www.youtube.com/",
+      height: 270,
+      width: 480,
+      thumbnail_height: 360,
+      html: "<some html/>"
+    }
   }
 ];
 
@@ -71,7 +101,8 @@ describe("asMarkdown", function() {
       "# Title\n\n",
       "A > B\n\n",
       "```\n<example>\n  TEST\n</example>\n```\n\n",
-      "This is **bold** and _italic_ and **_>:) both_**.\n\n"
+      "This is **bold** and _italic_ and **_>:) both_**.\n\n",
+      '[![Video Title](https://i.ytimg.com/vi/youtube-id/hqdefault.jpg)](https://www.youtube.com/watch?v=youtube-id "embed-youtube")'
     ];
 
     it("should contain the first paragraph with special character escaped", function() {
@@ -84,6 +115,10 @@ describe("asMarkdown", function() {
 
     it("should contain the second paragraph with tags added special character escaped in text content only", function() {
       expect(result).have.string(expectations[2]);
+    });
+
+    it("should contain a fallback for embeds", function() {
+      expect(result).have.string(expectations[4]);
     });
 
     it("should equal the expected string in full", function() {

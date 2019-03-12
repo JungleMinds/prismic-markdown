@@ -52,6 +52,10 @@ Render a RichText:
 RichText.render(mydoc.data.myrichtext, linkResolver);
 ```
 
+**!! note !!**
+
+Embeds will be presented as a link with an image inside, the link will have the title "embed-<provider_name>" like "embed-youtube"
+
 - As Text
 
 ```javascript

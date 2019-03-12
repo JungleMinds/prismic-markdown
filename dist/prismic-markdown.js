@@ -155,10 +155,10 @@ function serialize(linkResolver, type, element, content, children) {
     case _prismicRichtext.Elements.hyperlink:
       return serializeHyperlink(linkResolver, element, children);
     case _prismicRichtext.Elements.embed:
-      // no MD support, fall back to plain html
+      // no MD support fall back to image with link
       return serializeEmbed(element);
     case _prismicRichtext.Elements.label:
-      // no MD support, fall back to plain html
+      // no MD support, fall back to span
       return serializeSpan(element, children);
     case _prismicRichtext.Elements.span:
       return serializeSpan(content);
@@ -206,13 +206,17 @@ function serializeHyperlink(linkResolver, element, children) {
   return "[" + children.join("") + "](" + _prismicHelpers.Link.url(element.data, linkResolver) + ")";
 }
 
+function serializeEmbed(element) {
+  return "[![" + element.oembed.title + "](" + (element.oembed.thumbnail_url || "") + ")](" + element.oembed.embed_url + (element.oembed.provider_name ? " \"embed-" + element.oembed.provider_name.toLowerCase() + "\"" : ' "embed"') + ")\n\n";
+}
+
 function serializeSpan(content) {
   return content ? content.replace(/\n/g, "<br />") : "";
 }
 
 exports.default = {
   asText: function asText(structuredText, joinString) {
-    return _prismicRichtext2.default.asText(structuredText, joinString);
+    return _prismicRichtext2.default.asText(structuredText, joinString).trim();
   },
   asMarkdown: function asMarkdown(richText, linkResolver) {
     var serialized = _prismicRichtext2.default.serialize(richText, serialize.bind(null, linkResolver));

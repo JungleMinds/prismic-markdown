@@ -35,9 +35,9 @@ function serialize(linkResolver, type, element, content, children) {
       return serializeImage(linkResolver, element);
     case Elements.hyperlink:
       return serializeHyperlink(linkResolver, element, children);
-    case Elements.embed: // no MD support, fall back to plain html
+    case Elements.embed: // no MD support fall back to image with link
       return serializeEmbed(element);
-    case Elements.label: // no MD support, fall back to plain html
+    case Elements.label: // no MD support, fall back to span
       return serializeSpan(element, children);
     case Elements.span:
       return serializeSpan(content);
@@ -90,13 +90,23 @@ function serializeHyperlink(linkResolver, element, children) {
   )})`;
 }
 
+function serializeEmbed(element) {
+  return `[![${element.oembed.title}](${element.oembed.thumbnail_url || ""})](${
+    element.oembed.embed_url
+  }${
+    element.oembed.provider_name
+      ? ` "embed-${element.oembed.provider_name.toLowerCase()}"`
+      : ' "embed"'
+  })\n\n`;
+}
+
 function serializeSpan(content) {
   return content ? content.replace(/\n/g, "<br />") : "";
 }
 
 export default {
   asText(structuredText, joinString) {
-    return PrismicRichText.asText(structuredText, joinString);
+    return PrismicRichText.asText(structuredText, joinString).trim();
   },
 
   asMarkdown(richText, linkResolver) {
