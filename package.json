@@ -1,6 +1,6 @@
 {
   "name": "prismic-markdown",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "render prismic json fragments as Markdown",
   "main": "dist/prismic-markdown.js",
   "scripts": {
