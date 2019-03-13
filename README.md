@@ -49,7 +49,7 @@ Render a RichText:
 - As Markdown
 
 ```javascript
-RichText.render(mydoc.data.myrichtext, linkResolver);
+RichText.asMarkdown(mydoc.data.myrichtext, linkResolver);
 ```
 
 **!! note !!**
