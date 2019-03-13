@@ -99,7 +99,11 @@ var _richtext2 = _interopRequireDefault(_richtext);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-module.exports = { Date: _prismicHelpers2.default.Date, RichText: _richtext2.default, Link: _prismicHelpers2.default.Link };
+module.exports = {
+  Date: _prismicHelpers2.default.Date,
+  RichText: _richtext2.default,
+  Link: _prismicHelpers2.default.Link
+};
 
 /***/ }),
 /* 2 */
@@ -198,7 +202,7 @@ function serializeOl(element, children) {
 function serializeImage(linkResolver, element) {
   var linkUrl = element.linkTo ? _prismicHelpers.Link.url(element.linkTo, linkResolver) : null;
 
-  var img = "![" + (element.alt || "") + "](" + element.url + " \"" + element.copyright + "\")";
+  var img = "![" + (element.alt || "") + "](" + element.url + (element.copyright ? " \"" + element.copyright + "\"" : "") + ")";
   return (linkUrl ? "[" + img + "](" + linkUrl + ")" : img) + "\n\n";
 }
 

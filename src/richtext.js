@@ -79,7 +79,9 @@ function serializeImage(linkResolver, element) {
     ? LinkHelper.url(element.linkTo, linkResolver)
     : null;
 
-  const img = `![${element.alt || ""}](${element.url} "${element.copyright}")`;
+  const img = `![${element.alt || ""}](${element.url}${
+    element.copyright ? ` "${element.copyright}"` : ""
+  })`;
   return `${linkUrl ? `[${img}](${linkUrl})` : img}\n\n`;
 }
 

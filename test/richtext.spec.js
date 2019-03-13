@@ -46,6 +46,20 @@ const mock = [
     ]
   },
   {
+    type: "image",
+    url: "/media/some-image.jpg",
+    alt: null,
+    copyright: null,
+    dimensions: { width: 1500, height: 1000 }
+  },
+  {
+    type: "image",
+    url: "/media/some-image-with-info.jpg",
+    alt: "with alt info",
+    copyright: "and a copyright",
+    dimensions: { width: 1500, height: 1000 }
+  },
+  {
     type: "embed",
     oembed: {
       type: "video",
@@ -102,6 +116,8 @@ describe("asMarkdown", function() {
       "A > B\n\n",
       "```\n<example>\n  TEST\n</example>\n```\n\n",
       "This is **bold** and _italic_ and **_>:) both_**.\n\n",
+      "![](/media/some-image.jpg)\n\n",
+      '![with alt info](/media/some-image-with-info.jpg "and a copyright")\n\n',
       '[![Video Title](https://i.ytimg.com/vi/youtube-id/hqdefault.jpg)](https://www.youtube.com/watch?v=youtube-id "embed-youtube")'
     ];
 
@@ -117,8 +133,13 @@ describe("asMarkdown", function() {
       expect(result).have.string(expectations[2]);
     });
 
-    it("should contain a fallback for embeds", function() {
+    it("should contain a images with and without info", function() {
       expect(result).have.string(expectations[4]);
+      expect(result).have.string(expectations[5]);
+    });
+
+    it("should contain a fallback for embeds", function() {
+      expect(result).have.string(expectations[6]);
     });
 
     it("should equal the expected string in full", function() {
