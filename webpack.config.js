@@ -8,7 +8,6 @@ var libraryName = "PrismicMarkdown",
   outputFile;
 
 if (yargs.argv.p) {
-  plugins.push(new webpack.optimize.UglifyJsPlugin({ minimize: true }));
   outputFile = fileName + ".min.js";
 } else {
   outputFile = fileName + ".js";
@@ -22,6 +21,9 @@ var config = {
     library: libraryName,
     libraryTarget: "umd",
     umdNamedDefine: true
+  },
+  optimization: {
+    minimize: true
   },
   module: {
     rules: [
