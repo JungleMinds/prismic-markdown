@@ -115,7 +115,7 @@ describe("asMarkdown", function() {
       "# Title\n\n",
       "A > B\n\n",
       "```\n<example>\n  TEST\n</example>\n```\n\n",
-      "This is **bold** and _italic_ and **_>:) both_**.\n\n",
+      "This is **bold** and _italic_ and _**>:) both**_.\n\n",
       "![](/media/some-image.jpg)\n\n",
       '![with alt info](/media/some-image-with-info.jpg "and a copyright")\n\n',
       '[![Video Title](https://i.ytimg.com/vi/youtube-id/hqdefault.jpg)](https://www.youtube.com/watch?v=youtube-id "embed-youtube")'
